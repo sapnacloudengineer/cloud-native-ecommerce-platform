@@ -3,11 +3,15 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
-import config from './config';
-import userRouter from './routers/userRouter';
-import orderRouter from './routers/orderRouter';
-import productRouter from './routers/productRouter';
-import uploadRouter from './routers/uploadRouter';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+import config from './config.js';
+import userRouter from './routers/userRouter.js';
+import orderRouter from './routers/orderRouter.js';
+import productRouter from './routers/productRouter.js';
+import uploadRouter from './routers/uploadRouter.js';
 
 mongoose
   .connect(config.MONGODB_URL, {
@@ -31,7 +35,7 @@ app.use('/api/orders', orderRouter);
 app.get('/api/paypal/clientId', (req, res) => {
   res.send({ clientId: config.PAYPAL_CLIENT_ID });
 });
-app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));;
 app.use(express.static(path.join(__dirname, '/../frontend')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../frontend/index.html'));
