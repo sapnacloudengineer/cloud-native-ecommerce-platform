@@ -1,7 +1,6 @@
 pipeline {
 agent any
 
-```
 environment {
     DOCKERHUB_USER = 'sapna201'
 }
@@ -46,6 +45,5 @@ stages {
         }
     }
 }
-```
 
 }
