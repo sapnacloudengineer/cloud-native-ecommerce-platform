@@ -28,9 +28,9 @@ stages {
             sh 'docker build -t $DOCKERHUB_USER/pro-frontend:v1 ./frontend'
         }
     }
-     stage('trivy scane backend') {
+     stage('trivy scane frontend') {
         steps {
-            sh 'trivy image --severity HIGH,CRITICAL $DOCKERHUB_USER/pro-backend:v1'
+            sh 'trivy image --severity HIGH,CRITICAL $DOCKERHUB_USER/pro-frontend:v1'
        }
     }
     stage('Docker Login') {
