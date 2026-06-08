@@ -18,13 +18,21 @@ stages {
             sh 'docker build -t $DOCKERHUB_USER/pro-backend:v1 ./backend'
         }
     }
-
+    stage('trivy scane backend') {
+       steps {
+           sh 'trivy image --severity HIGH,CRITICAL $DOCKERHUB_USER/pro-backend:v1'
+       }
+    }
     stage('Build Frontend') {
         steps {
             sh 'docker build -t $DOCKERHUB_USER/pro-frontend:v1 ./frontend'
         }
     }
-
+     stage('trivy scane backend') {
+        steps {
+            sh 'trivy image --severity HIGH,CRITICAL $DOCKERHUB_USER/pro-backend:v1'
+       }
+    }
     stage('Docker Login') {
         steps {
             withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -32,7 +40,7 @@ stages {
             }
         }
     }
-
+    
     stage('Push Backend') {
         steps {
             sh 'docker push $DOCKERHUB_USER/pro-backend:v1'
