@@ -52,6 +52,30 @@ stages {
             sh 'docker push $DOCKERHUB_USER/pro-frontend:v1'
         }
     }
+
+    stage('Terraform Init') {
+      steps {
+        dir('terraform') {
+            sh 'terraform init'
+        }
+    }
+}
+   stage('Terraform validate') {
+      steps {
+        dir('terraform') {
+            sh 'terraform validate'
+        }
+    }
+}
+   stage('Terraform plan') {
+      steps {
+        dir('terraform') {
+            sh 'terraform plan'
+        }
+    }
 }
 
 }
+    
+    
+    
