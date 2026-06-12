@@ -93,13 +93,13 @@ pipeline {
                 }
             }
         }
-     tage('Clone Code') {
+     stage('Clone Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/sapnacloudengineer/cloud-native-ecommerce-platform'
             }
         }
 
-        stage('Deploy to Kubernetes') {
+     stage('Deploy to Kubernetes') {
             steps {
                 sh '''
                 ls -R
