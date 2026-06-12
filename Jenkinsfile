@@ -93,13 +93,19 @@ pipeline {
                 }
             }
         }
-     stage('Deploy to Kubernetes') {
-           steps {
-               dir('cloud-native-ecommerce-platform') {
-                  sh 'ls -R'
-                  sh 'kubectl apply -f k8s/'
-               }
-           }
-       }
+     tage('Clone Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/sapnacloudengineer/cloud-native-ecommerce-platform'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                ls -R
+                kubectl apply -f k8s/
+                '''
+            }
+        }
     }
 }
