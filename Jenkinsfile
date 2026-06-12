@@ -92,6 +92,16 @@ pipeline {
                     sh 'terraform apply -auto-approve'
                 }
             }
-        }              
+        }
+     stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                kubectl apply -f k8s/backend-deployment.yml
+                kubectl apply -f k8s/backend-service.yml
+                kubectl apply -f k8s/frontend-deployment.yml
+                kubectl apply -f k8s/frontend-service.yml
+                '''
+            }
+        }   
     }
 }
