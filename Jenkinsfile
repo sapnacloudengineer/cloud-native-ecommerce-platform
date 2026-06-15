@@ -63,42 +63,6 @@ pipeline {
             }
         }
 
-        stage('Terraform Init') {
-            steps {
-                dir('terraform') {
-                    sh 'terraform init'
-                }
-            }
-        }
-
-        stage('Terraform Validate') {
-            steps {
-                dir('terraform') {
-                    sh 'terraform validate -no-color'
-                }
-            }
-        }
-
-        stage('Terraform Plan') {
-            steps {
-                dir('terraform') {
-                    sh 'terraform plan'
-                }
-            }
-        }
-      stage('Terraform Apply') {
-            steps {
-                dir('terraform') {
-                    sh 'terraform apply -auto-approve'
-                }
-            }
-        }
-     stage('Clone Code') {
-            steps {
-                git branch: 'master', url: 'https://github.com/sapnacloudengineer/cloud-native-ecommerce-platform'
-            }
-        }
-
      stage('Deploy to Kubernetes') {
             steps {
                 sh '''
