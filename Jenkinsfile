@@ -95,7 +95,7 @@ pipeline {
         }
      stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/sapnacloudengineer/cloud-native-ecommerce-platform'
+                git branch: 'master', url: 'https://github.com/sapnacloudengineer/cloud-native-ecommerce-platform'
             }
         }
 
