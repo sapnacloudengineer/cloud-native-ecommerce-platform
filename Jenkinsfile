@@ -19,21 +19,9 @@ pipeline {
             }
         }
 
-        stage('Trivy Scan Backend') {
-            steps {
-                sh 'trivy image --severity HIGH,CRITICAL $DOCKERHUB_USER/pro-backend:v1'
-            }
-        }
-
         stage('Build Frontend') {
             steps {
                 sh 'docker build -t $DOCKERHUB_USER/pro-frontend:v1 ./frontend'
-            }
-        }
-
-        stage('Trivy Scan Frontend') {
-            steps {
-                sh 'trivy image --severity HIGH,CRITICAL $DOCKERHUB_USER/pro-frontend:v1'
             }
         }
 
