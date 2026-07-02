@@ -25,6 +25,28 @@ pipeline {
             }
         }
 
+        stage('Trivy Scan Backend') {
+            steps {
+              sh '''
+              trivy image \
+              --severity HIGH,CRITICAL \
+              --exit-code 0 \
+              sapna201/pro-backend:v1
+              '''
+             }
+         }
+
+         stage('Trivy Scan Frontend') {
+            steps {
+               sh '''
+               trivy image \
+               --severity HIGH,CRITICAL \
+               --exit-code 0 \
+               sapna201/pro-frontend:v1
+               '''
+            }
+        }
+        
         stage('Docker Login') {
             steps {
                 withCredentials([
